@@ -1,0 +1,32 @@
+<!--scope:true或false-->
+<!DOCTYPE html>
+<html lang="en"ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script>
+        var app=angular.module('app',[]);
+        app.controller('mainCtrl',function($scope){
+            $scope.name='ruirui';
+            $scope.dream='change world';
+        })
+        app.directive('myDirective',function(){
+            return{
+                restrict:"AE",
+                replace:true,
+                scope:false,
+                template:"<div class='new'>" + "<p>这里是新生成的指令</p>"+ "<p>我的名字是:{{name}}"+"<br>"+"<input type='text' ng-model='name'>"+
+                "</div>"
+            }
+        })
+    </script>
+</head>
+<body>
+<div ng-controller="mainCtrl">
+    <p>我的名字是：{{name}}</p>
+    <p>我的梦想是：{{dream}}</p>
+    <div my-directive></div>
+</div>
+</body>
+</html>

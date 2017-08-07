@@ -1,0 +1,39 @@
+<!--scope:{@或&或=}-->
+<!DOCTYPE html>
+<html lang="en"ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script>
+        var app=angular.module('app',[]);
+        app.controller('mainCtrl',function($scope){
+            $scope.name='ruirui';
+            $scope.dream='change world';
+            $scope.changeDream=function(){
+                $scope.dream="gogogo!"
+            }
+        })
+        app.directive('myDirective',function(){
+            return{
+                restrict:"AE",
+                replace:true,
+                scope:{
+                    name:'@myName',
+                    dream:'=dream',
+                    changeDream:'&changeMyDream'
+                },
+                template:"<div class='new'>" + "<p>这里是新生成的指令</p>"+ "<p>我的名字是:{{name}}</p>"+"<br>"+"<input type='text' ng-model='name'>"+ "<p>我的梦想是:{{dream}}</p>"+"<br>"+"<input type='text' ng-model='dream'>"+"<br>"+"<button ng-click='changeDream()'>改变梦想</button>"+
+                "</div>"
+            }
+        })
+    </script>
+</head>
+<body>
+<div ng-controller="mainCtrl">
+    <p>我的名字是：{{name}}</p>
+    <p>我的梦想是：{{dream}}</p>
+    <div my-directive my-name="{{name}}" dream="dream" change-my-dream="changeDream()"></div>
+</div>
+</body>
+</html>
